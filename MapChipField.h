@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdint>
 #include <vector>
 #include <Vector3.h>
@@ -6,6 +8,9 @@
 enum class MapChipType {
 	kBlank, //空白
 	kBlock, //ブロック
+	kDamageBlock, // ダメージブロック
+	kItem,        // アイテム
+	kItems10,     ///複数アイテム（10）
 };
 
 struct MapChipData {
@@ -30,6 +35,9 @@ public:
 
 	Vector3 GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex);
 
+	// 新しく追加するメソッドの宣言
+	void SetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex, MapChipType newType); // 追加
+
 	struct IndexSet {
 		uint32_t xIndex;
 		uint32_t yIndex;
@@ -50,8 +58,8 @@ public:
 	private:
 
 	// ブロックの個数
-	static inline const uint32_t kNumBlockVirtical = 20;
-	static inline const uint32_t kNumBlockHorizontal = 100;
+	static inline const uint32_t kNumBlockVirtical = 30;
+	static inline const uint32_t kNumBlockHorizontal = 75;
 
 	MapChipData mapChipData_;
 };

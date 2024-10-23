@@ -7,9 +7,11 @@
 #include "TextureManager.h"
 #include "TitleScene.h"
 #include "WinApp.h"
+#include "Clear.h"
 
 GameScene* gameScene = nullptr;
 TitleScene* titleScene = nullptr;
+ClearScene* clearScene = nullptr;
 
 // シーン（型）
 enum class Scene {
@@ -17,6 +19,7 @@ enum class Scene {
 
 	kTitle,
 	kGame,
+	kClear,
 };
 // 現在シーン（型）
 Scene scene = Scene::kTitle;
@@ -39,7 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow(L"LE2C_12_ササノ_ミカゼ_AL3"); //
+	win->CreateGameWindow(L"2165_毛根救済"); //
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
@@ -82,6 +85,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	titleScene = new TitleScene();
 	titleScene->Initialize();
 	
+	//クリアシーン
+	clearScene = new ClearScene();
+	clearScene->Initialize();
+
 
 	// メインループ
 	while (true) {
@@ -120,6 +127,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 各種解放
 	delete gameScene;
 	delete titleScene;
+	delete clearScene;
 
 	// 3Dモデル解放
 	Model::StaticFinalize();
@@ -150,10 +158,22 @@ void ChangeScene() {
 	case Scene::kGame:
 		if (gameScene->IsFinished()) {
 			// シーン変更
-			scene = Scene::kTitle;
+			scene = Scene::kClear;
 			// 旧シーンの解放
 			delete gameScene;
 			gameScene = nullptr;
+			// 新しいシーンの生成と初期化
+			clearScene = new ClearScene;
+			clearScene->Initialize();
+		}
+		break;
+	case Scene::kClear:
+		if (clearScene->IsFinished()) {
+			// シーン変更
+			scene = Scene::kTitle;
+			// 旧シーンの解放
+			delete clearScene;
+			clearScene = nullptr;
 			// 新しいシーンの生成と初期化
 			titleScene = new TitleScene;
 			titleScene->Initialize();
@@ -171,6 +191,9 @@ void UpdateScene() {
 	case Scene::kGame:
 		gameScene->Update();
 		break;
+	case Scene::kClear:
+		clearScene->Update();
+		break;
 	}
 }
 
@@ -181,6 +204,9 @@ void DrawScene() {
 		break;
 	case Scene::kGame:
 		gameScene->Draw();
+		break;
+	case Scene::kClear:
+		clearScene->Draw();
 		break;
 	}
 }

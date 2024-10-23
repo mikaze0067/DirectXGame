@@ -23,3 +23,7 @@ Matrix4x4 MakeRotateZMatrix(float radian);
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translation);
 
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
+
+float Dot(const Vector3& v1, const Vector3& v2);
+
+float Length(const Vector3& v);

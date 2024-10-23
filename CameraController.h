@@ -43,12 +43,12 @@ public: // メンバ関数
 	Vector3 targetOffset_ = {0, 0, -15.0f};
 
 	//カメラ移動範囲
-	Rect movableArea_ = {0, 100, 0, 100};
+	Rect movableArea_ = {50, 100, 50, 100};
 
 	//座標補間割合
 	static inline const float kInterpolationRate = 0.1f;
 	//速度掛け率
 	static inline const float kVelocityBias = 30.0f;
 	//追従対象の各方向へのカメラ移動範囲
-	static inline const Rect margin = {-9.0f, 9.0f, -5.0f, 5.0f};
+	static inline const Rect margin = {-10.0f, 10.0f, -10.0f, 10.0f};
 };

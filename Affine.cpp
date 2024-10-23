@@ -90,3 +90,16 @@ Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
 
 	return ans;
 }
+
+float Dot(const Vector3& v1, const Vector3& v2) {
+	float ans;
+	ans = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	return ans;
+}
+
+float Length(const Vector3& v) {
+	float ans;
+	ans = sqrtf(Dot(v, v));
+	return ans;
+}
+

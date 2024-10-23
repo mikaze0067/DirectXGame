@@ -8,6 +8,9 @@ namespace {
 std::map<std::string, MapChipType> mapChipTable = {
     {"0", MapChipType::kBlank},
     {"1", MapChipType::kBlock},
+    {"2", MapChipType::kDamageBlock},
+    {"3", MapChipType::kItem},
+    {"4", MapChipType::kItems10}
 };
 }
 
@@ -26,7 +29,6 @@ void MapChipField::ResetMapChipData() {
 		mapChipDataLine.resize(kNumBlockHorizontal);
 	}
 }
-
 
 void MapChipField::LoadMapChipCsv(const std::string& filePath) {
 
@@ -80,6 +82,13 @@ MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex
 
 Vector3 MapChipField::GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex) { 
 	return Vector3(kBlockWidth * xIndex, kBlockHeight * (kNumBlockVirtical - 1 - yIndex), 0); 
+}
+
+void MapChipField::SetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex, MapChipType newType) {
+	// xIndex と yIndex が範囲内か確認する
+	if (xIndex < kNumBlockHorizontal && yIndex < kNumBlockVirtical) {
+		mapChipData_.data[yIndex][xIndex] = newType; // 新しいマップチップタイプを設定する
+	}
 }
 
 MapChipField::IndexSet MapChipField::GetMapChipIndexSetByPosition(const Vector3& position) {

@@ -6,6 +6,7 @@
 #include "DebugCamera.h"
 #include "DirectXCommon.h"
 #include "Enemy.h"
+#include "Goal.h"
 #include "Input.h"
 #include "Model.h"
 #include "Player.h"
@@ -15,6 +16,7 @@
 #include "WorldTransform.h"
 #include <MapChipField.h>
 #include <vector>
+#include "Clear.h"
 
 /// <summary>
 /// ゲームシーン
@@ -51,10 +53,14 @@ public: // メンバ関数
 
 	void CheckAllCollisions();
 
+	void CheckGoalCollisions();
+
 	void GenerateBlocks();
 
 	// デスフラグのgetter
 	bool IsFinished() const { return finished_; }
+
+	
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -72,6 +78,10 @@ private: // メンバ変数
 	Model* modelBlock_ = nullptr;
 	Model* modelEnemy_ = nullptr;
 	Model* modelDeathParticles = nullptr;
+	Model* modelGoal_ = nullptr;
+	Model* modelDamageBlock_ = nullptr;
+	Model* modelItem_ = nullptr;
+	Model* modelItems10_ = nullptr;
 
 	// ワールドトランスフォーム
 	WorldTransform worldTransform_;
@@ -83,18 +93,25 @@ private: // メンバ変数
 
 	// 自キャラ
 	Player* player_ = nullptr;
+
 	// 敵キャラ
-	// Enemy* enemy_ = nullptr;
 	std::list<Enemy*> enemies_;
+	
+	// ゴール
+	std::list<Goal*> goal_;
 
 	DeathParticles* deathParticles_ = nullptr;
 	// ゲームのフェーズ（型）
 	enum class Phase {
 		kPlay,  // ゲームプレイ
 		kDeath, // デス演出
+		kGoal,  // ゴール
+		kClear, // クリア
 	};
 	// ゲームの現在フェーズ（変数）
 	Phase phase_;
+
+	ClearScene* clear_ = nullptr;
 
 	// 縦横ブロック配列
 	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
@@ -113,4 +130,22 @@ private: // メンバ変数
 	CameraController* cameraController_ = nullptr;
 	// 終了フラグ
 	bool finished_ = false;
+
+
+
+	uint32_t time10 = 0;
+
+	uint32_t Time1 = 0;
+
+	uint32_t timerscene = 3600;
+
+	uint32_t time60 = 0;
+
+	Sprite* num_ = nullptr;
+
+	Sprite* num_1 = nullptr;
+
+	uint32_t num[10];
+
+	
 };

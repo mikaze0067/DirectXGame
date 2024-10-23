@@ -82,6 +82,14 @@ void GameScene::Initialize() {
 
 	player_->SetMapChipField(mapChipField_);
 
+	clearScene_ = new ClearScene();
+	 // ClearSceneの初期化
+	clearScene_->Initialize();
+
+	// PlayerにClearSceneのポインタを渡す
+	player_->SetClearScene(clearScene_); 
+
+
 	// 敵キャラの生成
 	// enemy_ = new Enemy();
 	for (int32_t i = 0; i < 2; ++i) {
@@ -122,7 +130,7 @@ void GameScene::Initialize() {
 	phase_ = Phase::kPlay;
 
 	//クリア
-	clear_ = new ClearScene();
+	clearScene_ = new ClearScene();
 
 	// 天球の生成
 	skydome_ = new Skydome();
@@ -284,16 +292,11 @@ void GameScene::Draw() {
 		break;
 	case Phase::kClear:
 
-		clear_->Draw();
+		clearScene_->Draw();
 
 		break;
 
 	}
-
-
-
-
-
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

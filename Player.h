@@ -9,10 +9,11 @@
 #include <algorithm>
 #include <numbers>
 #include <MapChipField.h>
-
+#include "Clear.h"
 
 class Enemy;
 class Goal;
+class ClearScene;
 
 /// <summary>
 /// 自キャラ
@@ -74,6 +75,8 @@ public:
 
 	// ゴールフラグgetter
 	bool IsGoal() const { return isGoal_; }
+
+	void SetClearScene(ClearScene* clearScene) { clearScene_ = clearScene; }
 
 	int GetScore100() const { return score100; }
 	int GetScore10() const { return score10; }
@@ -154,6 +157,8 @@ private:
 	uint32_t score_;
 	//タイム
 	float time = 0;
+
+	ClearScene* clearScene_ = nullptr;
 
 	void inputMove();
 

@@ -15,7 +15,6 @@ void ClearScene::Initialize() {
 	num[8] = TextureManager::Load("./Resources/8.png");
 	num[9] = TextureManager::Load("./Resources/9.png");
 
-	score1 = 1;
 }
 
 void ClearScene::Update() {
@@ -26,7 +25,19 @@ void ClearScene::Update() {
 }
 
 void ClearScene::Draw() {
-	score_100 = Sprite::Create(num[score100], {260, 80});
-	score_10 = Sprite::Create(num[score10], {560, 80});
-	score_1 = Sprite::Create(num[score1], {360, 80});
+	// 各桁のスコアをスプライトで描画
+	scoreSprite100_ = Sprite::Create(num[score_100], {260, 80});
+	scoreSprite10_ = Sprite::Create(num[score_10], {360, 80});
+	scoreSprite1_ = Sprite::Create(num[score_1], {460, 80});
+
+	// スプライトを描画
+	scoreSprite100_->Draw();
+	scoreSprite10_->Draw();
+	scoreSprite1_->Draw();
+}
+
+void ClearScene::SetScore(uint32_t score100, uint32_t score10, uint32_t score1) {
+	score_100 = score100;
+	score_10 = score10;
+	score_1 = score1;
 }

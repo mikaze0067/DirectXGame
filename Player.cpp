@@ -63,7 +63,10 @@ void Player::Update() {
 		score10 = score_ / 10;
 		score_ = score_ % 10;
 		score1 = score_ / 1;
-	}
+	}// ゴールに達した場合、clearScene_にスコアを設定
+    if (isGoal_ && clearScene_) { // nullチェック
+        clearScene_->SetScore(score100, score10, score1);
+    }
 }
 
 void Player::Draw() { 

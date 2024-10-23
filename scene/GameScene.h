@@ -111,7 +111,7 @@ private: // メンバ変数
 	// ゲームの現在フェーズ（変数）
 	Phase phase_;
 
-	ClearScene* clear_ = nullptr;
+	ClearScene* clearScene_ = nullptr;
 
 	// 縦横ブロック配列
 	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
@@ -130,6 +130,7 @@ private: // メンバ変数
 	CameraController* cameraController_ = nullptr;
 	// 終了フラグ
 	bool finished_ = false;
+
 
 
 

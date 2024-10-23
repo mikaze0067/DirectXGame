@@ -26,9 +26,11 @@ public:
 	// デスフラグのgetter
 	bool IsFinished() const { return finished_; }
 
-	int GetScore100() const { return score100; }
-	int GetScore10() const { return score10; }
-	int GetScore1() const { return score1; }
+	void SetScore(uint32_t score100, uint32_t score10, uint32_t score1);
+
+	int GetScore100() const { return score_100; }
+	int GetScore10() const { return score_10; }
+	int GetScore1() const { return score_1; }
 
 private:
 	ViewProjection viewProjection_;
@@ -44,17 +46,17 @@ private:
 
 	int time = 420;
 
-	int score100;
-
-	int score1;
-	int score10;
-
+	int score_100;
+	int score_10;
+	int score_1;
+	int score_;
+	
 	uint32_t num[10];
 
-	Sprite* score_100 = nullptr;
+	Sprite* scoreSprite100_ = nullptr;
 
-	Sprite* score_10 = nullptr;
+	Sprite* scoreSprite10_ = nullptr;
 
-	Sprite* score_1 = nullptr;
+	Sprite* scoreSprite1_ = nullptr;
 	
 };

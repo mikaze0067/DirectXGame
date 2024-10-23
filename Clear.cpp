@@ -15,6 +15,7 @@ void ClearScene::Initialize() {
 	num[8] = TextureManager::Load("./Resources/8.png");
 	num[9] = TextureManager::Load("./Resources/9.png");
 
+	score1 = 1;
 }
 
 void ClearScene::Update() {
